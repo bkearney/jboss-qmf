@@ -1,0 +1,8 @@
+Based on: http://oddthesis.org/theses/jboss-rails
+
+Supports exposing session beans as QMF objects (using @QMFObject),
+declaring QMF-serializable classes using @QMFType, @QMFEvent and @QMFSeeAlso,
+and injecting agent using @QMFAgent.
+
+Only single agent is currently supported, in order to configure it (broker url for example) one must manually edit
+qmf-deployer-jboss-beans.xml file.
