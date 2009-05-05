@@ -1,21 +1,23 @@
 package org.jboss.qmf.core.deployers;
 
+import org.apache.qpid.agent.annotations.QMFAgent;
+import org.apache.qpid.agent.annotations.QMFEvent;
+import org.apache.qpid.agent.annotations.QMFSeeAlso;
+import org.apache.qpid.agent.annotations.QMFType;
+import org.jboss.classloading.spi.dependency.Module;
 import org.jboss.deployers.plugins.annotations.GenericAnnotationDeployer;
 import org.jboss.deployers.plugins.annotations.GenericAnnotationResourceVisitor;
-import org.jboss.deployers.structure.spi.DeploymentUnit;
 import org.jboss.deployers.spi.annotations.AnnotationEnvironment;
 import org.jboss.deployers.spi.annotations.Element;
-import org.jboss.deployers.spi.DeploymentException;
-import org.jboss.classloading.spi.dependency.Module;
-import org.jboss.qmf.core.metadata.QmfRegisteredClassesMetaData;
-import org.jboss.metadata.ejb.jboss.JBossMetaData;
+import org.jboss.deployers.structure.spi.DeploymentUnit;
 import org.jboss.logging.Logger;
-import org.jboss.deployment.AnnotationMetaDataDeployer;
-import org.apache.qpid.agent.annotations.QMFSeeAlso;
-import javassist.ClassPool;
+import org.jboss.metadata.ejb.jboss.JBossMetaData;
+import org.jboss.qmf.core.metadata.QmfAgentReferencesMetaData;
+import org.jboss.qmf.core.metadata.QmfRegisteredClassesMetaData;
 
-import java.util.Set;
+import java.lang.reflect.Field;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,7 +33,8 @@ public class QmfTypeAnnotationDeployer extends GenericAnnotationDeployer {
         log.info("Initalizing "+this.getClass().getSimpleName());
         addInput(JBossMetaData.class);
         setOutputs(new HashSet<String>());
-        setOutput(QmfRegisteredClassesMetaData.class);
+        addOutput(QmfRegisteredClassesMetaData.class);
+        addOutput(QmfAgentReferencesMetaData.class);
     }
 
     @Override
@@ -39,11 +42,28 @@ public class QmfTypeAnnotationDeployer extends GenericAnnotationDeployer {
         super.visitModule(deploymentUnit, module, genericAnnotationResourceVisitor);
 
         AnnotationEnvironment annotationEnvironment = genericAnnotationResourceVisitor.getEnv();
-        Set<Element<QMFSeeAlso,Class<?>>> qmfSeeAlsoAnnotations = annotationEnvironment.classIsAnnotatedWith(QMFSeeAlso.class);
 
+        createQmfTypesRegistrationMetadata(deploymentUnit, annotationEnvironment);
+        createQmfAgentReferencesMetadata(deploymentUnit, annotationEnvironment);
+    }
+
+    private void createQmfAgentReferencesMetadata(DeploymentUnit deploymentUnit, AnnotationEnvironment annotationEnvironment) {
+        QmfAgentReferencesMetaData referencesMetadata = new QmfAgentReferencesMetaData();
+
+        Set<Element<QMFAgent, Field>> agentReferenceAnnotations = annotationEnvironment.classHasFieldAnnotatedWith(QMFAgent.class);
+        for (Element<QMFAgent, Field> agentReferenceAnnotation : agentReferenceAnnotations) {
+            Field refField = agentReferenceAnnotation.getAnnotatedElement();
+            referencesMetadata.add(refField);
+        }
+
+        deploymentUnit.addAttachment(QmfAgentReferencesMetaData.class, referencesMetadata);
+    }
+
+    private void createQmfTypesRegistrationMetadata(DeploymentUnit deploymentUnit, AnnotationEnvironment annotationEnvironment) {
         QmfRegisteredClassesMetaData metaData = new QmfRegisteredClassesMetaData();
 
-        // create metadata for each class we need to register
+        // create metadata for each class marked with QMFSeeAlso we need to register
+        Set<Element<QMFSeeAlso,Class<?>>> qmfSeeAlsoAnnotations = annotationEnvironment.classIsAnnotatedWith(QMFSeeAlso.class);
         for (Element<QMFSeeAlso, Class<?>> qmfSeeAlsoAnnotation : qmfSeeAlsoAnnotations) {
 
             // add the root class
@@ -55,6 +75,18 @@ public class QmfTypeAnnotationDeployer extends GenericAnnotationDeployer {
             for (Class subClass : subClasses) {
                 metaData.add(subClass);
             }
+        }
+
+        // create metadata for each class marked with QMFType we need to register
+        Set<Element<QMFType, Class<?>>> qmfTypeAnnotations = annotationEnvironment.classIsAnnotatedWith(QMFType.class);
+        for (Element<QMFType, Class<?>> qmfTypeAnnotation : qmfTypeAnnotations) {
+            metaData.add(qmfTypeAnnotation.getAnnotatedElement());
+        }
+
+        // create metadata for each class marked with QMFEvent we need to register
+        Set<Element<QMFEvent, Class<?>>> qmfEventAnnotations = annotationEnvironment.classIsAnnotatedWith(QMFEvent.class);
+        for (Element<QMFEvent, Class<?>> qmfEventAnnotation : qmfEventAnnotations) {
+            metaData.add(qmfEventAnnotation.getAnnotatedElement());
         }
 
         // attach metadata to unit

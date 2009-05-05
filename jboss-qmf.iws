@@ -15,9 +15,18 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" name="Default" comment="" />
-    <ignored path=".idea/workspace.xml" />
+    <list default="true" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/metadata/RailsVersionMetaData.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jboss-qmf.ipr" afterPath="$PROJECT_DIR$/jboss-qmf.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfTypeAnnotationDeployer.java" afterPath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfTypeAnnotationDeployer.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/metadata/RailsApplicationMetaData.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jboss-qmf.iws" afterPath="$PROJECT_DIR$/jboss-qmf.iws" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/metadata/QmfAgentReferencesMetaData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java" afterPath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/RailsRootRecognizingDeployer.java" afterPath="" />
+    </list>
     <ignored path="jboss-qmf.iws" />
+    <ignored path=".idea/workspace.xml" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="Commander">
@@ -34,7 +43,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/annotations/GenericAnnotationDeployer.java" line="149" class="org.jboss.deployers.plugins.annotations.GenericAnnotationDeployer" package="org.jboss.deployers.plugins.annotations">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java" line="74" class="org.jboss.qmf.core.deployers.QmfServiceDeployerEJB" package="org.jboss.qmf.core.deployers">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -47,7 +56,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/deployers/DeployersImpl.java" line="250" class="org.jboss.deployers.plugins.deployers.DeployersImpl" package="org.jboss.deployers.plugins.deployers">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java" line="58" class="org.jboss.qmf.core.deployers.QmfServiceDeployerEJB" package="org.jboss.qmf.core.deployers">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -58,6 +67,19 @@
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
         <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfTypeAnnotationDeployer.java" line="62" class="org.jboss.qmf.core.deployers.QmfTypeAnnotationDeployer" package="org.jboss.qmf.core.deployers">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="deploymentUnit.toString().indexOf(&quot;vdc&quot;)!=-1" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
@@ -108,8 +130,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -118,10 +140,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="QmfServiceDeployerEJB.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="0" selection-start="2188" selection-end="2188" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="qmf-deployer-jboss-beans.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/assembly/resources/qmf-deployer-jboss-beans.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="QmfTypeAnnotationDeployer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfTypeAnnotationDeployer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="1548" selection-end="1548" vertical-scroll-proportion="0.43615675">
+            <state line="73" column="34" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.4500632">
               <folding />
             </state>
           </provider>
@@ -137,7 +179,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-2.1.0" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../apache-maven-2.1.0" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -166,24 +208,6 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="jboss-qmf" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jboss-qmf" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jboss-qmf" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jboss-qmf" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jboss-qmf" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
     </subPane>
@@ -221,18 +245,6 @@
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RunManager" selected="JBoss Server.TestDeploy">
-    <configuration default="true" type="JBossConfiguration" factoryName="Remote">
-      <option name="LOCAL" value="false" />
-      <server-settings>
-        <option name="JNDI_PORT" value="1099" />
-        <option name="USERNAME" value="" />
-        <option name="PASSWORD" value="" />
-      </server-settings>
-      <option name="JNDI_PORT" value="1099" />
-      <option name="USERNAME" value="" />
-      <option name="PASSWORD" value="" />
-      <predefined_log_file id="JBoss" enabled="true" />
-    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myCoreSettings">
@@ -273,6 +285,18 @@
         </option>
       </MavenSettings>
       <method />
+    </configuration>
+    <configuration default="true" type="JBossConfiguration" factoryName="Remote">
+      <option name="LOCAL" value="false" />
+      <server-settings>
+        <option name="JNDI_PORT" value="1099" />
+        <option name="USERNAME" value="" />
+        <option name="PASSWORD" value="" />
+      </server-settings>
+      <option name="JNDI_PORT" value="1099" />
+      <option name="USERNAME" value="" />
+      <option name="PASSWORD" value="" />
+      <predefined_log_file id="JBoss" enabled="true" />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -438,6 +462,10 @@
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StarteamConfiguration">
@@ -465,7 +493,7 @@
     <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
     <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <configuration useDefault="true">$PROJECT_DIR$/../../../.subversion</configuration>
+    <configuration useDefault="true">$PROJECT_DIR$/../../../../../.subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="TodoView" selected-index="0">
@@ -489,7 +517,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="25" width="1286" height="977" extended-state="6" />
+    <frame x="0" y="25" width="1280" height="974" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" />
@@ -497,7 +525,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31692678" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48379353" sideWeight="0.5" order="10" side_tool="false" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42857143" sideWeight="0.5" order="10" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" />
@@ -507,12 +535,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.6002401" order="2" side_tool="false" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3060065" sideWeight="0.67466986" order="0" side_tool="false" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20535715" sideWeight="0.56302524" order="0" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67466986" order="6" side_tool="false" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3823052" sideWeight="0.67466986" order="6" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39135653" sideWeight="0.5" order="9" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48979592" sideWeight="0.5" order="9" side_tool="false" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
     </layout>
@@ -587,114 +615,116 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/sort/DeployerDomino.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-sources.jar!/org/jboss/injection/lang/reflect/BeanProperty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="52" selection-start="1688" selection-end="1688" vertical-scroll-proportion="0.0">
+        <state line="32" column="17" selection-start="1355" selection-end="1355" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/annotations/GenericAnnotationResourceVisitor.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-sources.jar!/org/jboss/injection/AbstractPropertyInjector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="13" selection-start="2204" selection-end="2204" vertical-scroll-proportion="0.0">
+        <state line="38" column="13" selection-start="1428" selection-end="1428" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-client.jar!/org/jboss/injection/JndiPropertyInjector.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1226" selection-end="1311" vertical-scroll-proportion="0.0">
+        <state line="5" column="13" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/assembly/resources/qmf-deployer-jboss-beans.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-sources.jar!/org/jboss/injection/JndiPropertyInjector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="87" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.0">
+        <state line="51" column="22" selection-start="1905" selection-end="1925" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/jbossas/jboss-as-server/5.0.1.GA/jboss-as-server-5.0.1.GA-sources.jar!/org/jboss/ejb/deployers/MergedJBossMetaDataDeployer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-sources.jar!/org/jboss/injection/ResourceHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="2473" selection-end="2547" vertical-scroll-proportion="0.0">
+        <state line="584" column="68" selection-start="23825" selection-end="23825" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/deployers/DeployersImpl.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-sources.jar!/org/jboss/injection/lang/reflect/FieldBeanProperty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="269" column="0" selection-start="8355" selection-end="8355" vertical-scroll-proportion="-4.48">
+        <state line="40" column="10" selection-start="1494" selection-end="1494" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/jboss-reflect/2.0.0.GA/jboss-reflect-2.0.0.GA-sources.jar!/org/jboss/reflect/plugins/introspection/ReflectionUtils.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/jbossas/jboss-as-ejb3/5.0.1.GA/jboss-as-ejb3-5.0.1.GA-sources.jar!/org/jboss/ejb3/clientmodule/ResourceHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.0">
+        <state line="528" column="36" selection-start="20849" selection-end="20873" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/jbossas/jboss-as-server/5.0.1.GA/jboss-as-server-5.0.1.GA-sources.jar!/org/jboss/deployment/AnnotationMetaDataDeployer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/annotations/ClassElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="30" selection-start="2578" selection-end="2578" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-spi/2.0.4.GA/jboss-deployers-spi-2.0.4.GA-sources.jar!/org/jboss/deployers/spi/deployer/helpers/AbstractDeployer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/ejb3/jboss-ejb3-core/1.0.0/jboss-ejb3-core-1.0.0-sources.jar!/org/jboss/injection/PersistenceContextHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="299" column="15" selection-start="6542" selection-end="6542" vertical-scroll-proportion="0.0">
+        <state line="169" column="0" selection-start="7005" selection-end="7005" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/annotations/GenericAnnotationDeployer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/javassist/javassist/3.9.0.GA/javassist-3.9.0.GA-sources.jar!/javassist/scopedpool/ScopedClassPoolRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="33" selection-start="1967" selection-end="1988" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/jbossas/jboss-as-server/5.0.1.GA/jboss-as-server-5.0.1.GA-sources.jar!/org/jboss/deployment/AltAnnotationMetaDataDeployer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="15" selection-start="3482" selection-end="3482" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-spi/2.0.4.GA/jboss-deployers-spi-2.0.4.GA-sources.jar!/org/jboss/deployers/spi/deployer/helpers/AbstractAnnotationDeployer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="42" selection-start="2050" selection-end="2050" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-vfs/2.0.4.GA/jboss-deployers-vfs-2.0.4.GA-sources.jar!/org/jboss/deployers/vfs/deployer/kernel/BeanScanningDeployer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="13" selection-start="1907" selection-end="1907" vertical-scroll-proportion="0.0">
+        <state line="27" column="17" selection-start="932" selection-end="932" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-vfs/2.0.4.GA/jboss-deployers-vfs-2.0.4.GA-sources.jar!/org/jboss/deployers/vfs/plugins/annotations/AnnotationEnvironmentDeployer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="16" selection-start="2482" selection-end="2482" vertical-scroll-proportion="0.0">
+        <state line="153" column="75" selection-start="5132" selection-end="5132" vertical-scroll-proportion="0.03409091">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-impl/2.0.4.GA/jboss-deployers-impl-2.0.4.GA-sources.jar!/org/jboss/deployers/plugins/annotations/DefaultAnnotationEnvironment.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-vfs/2.0.4.GA/jboss-deployers-vfs-2.0.4.GA-sources.jar!/org/jboss/deployers/vfs/plugins/annotations/ScopedAnnotationEnvironmentDeployer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="33" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.5691964">
+        <state line="32" column="67" selection-start="1400" selection-end="1400" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/deployers/jboss-deployers-vfs/2.0.4.GA/jboss-deployers-vfs-2.0.4.GA-sources.jar!/org/jboss/deployers/vfs/plugins/annotations/FilteredAnnotationEnvironmentDeployer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="72" selection-start="1742" selection-end="1742" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/assembly/resources/qmf-deployer-jboss-beans.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="0" selection-start="2188" selection-end="2188" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfTypeAnnotationDeployer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1548" selection-end="1548" vertical-scroll-proportion="0.43615675">
+        <state line="73" column="34" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.4500632">
           <folding />
         </state>
       </provider>

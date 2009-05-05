@@ -43,7 +43,9 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/src/main/java/org/jboss/qmf/core/deployers/QmfServiceDeployerEJB.java" charset="UTF-8" />
+  </component>
   <component name="IdProvider" IDEtalkID="EE005D99B326AC6C0C37083E99D66C9A" />
   <component name="InspectionProjectProfileManager">
     <option name="PROJECT_PROFILE" value="Project Default" />
@@ -222,7 +224,7 @@
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
-    <option name="state" value="project:///home/gmostizk/java/git/jboss-qmf/jboss-qmf.ipr" />
+    <option name="state" value="project:///home/gmostizk/java/git/rhevx/playground/jboss-qmf/jboss-qmf.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>

@@ -17,9 +17,16 @@ import org.jboss.metadata.ejb.jboss.JBossEnterpriseBeanMetaData;
 import org.jboss.metadata.ejb.jboss.JBossMetaData;
 import org.jboss.metadata.ejb.jboss.JBossSessionBeanMetaData;
 import org.jboss.qmf.core.metadata.QmfRegisteredClassesMetaData;
+import org.jboss.qmf.core.metadata.QmfAgentReferencesMetaData;
+import org.jboss.injection.AbstractPropertyInjector;
+import org.jboss.injection.lang.reflect.FieldBeanProperty;
 
 import javax.management.ObjectName;
 import java.util.Set;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.lang.reflect.Field;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,7 +39,7 @@ public class QmfServiceDeployerEJB extends AbstractComponentDeployer {
     private static final Logger log = Logger.getLogger(QmfServiceDeployerEJB.class);
 
     private Agent qmfAgent;
-    
+
     public QmfServiceDeployerEJB() {
         log.warn("Starting Deployer");
         setInput(JBossSessionBeanMetaData.class);
@@ -40,16 +47,16 @@ public class QmfServiceDeployerEJB extends AbstractComponentDeployer {
 
     @Override public void internalDeploy(DeploymentUnit unit) throws DeploymentException {
         registerQmfObjects(unit);
-
         registerQmfTypes(unit);
     }
 
+
     private void registerQmfTypes(DeploymentUnit unit) {
         QmfRegisteredClassesMetaData metadata = unit.getAttachment(QmfRegisteredClassesMetaData.class);
-        if(metadata==null) return;
+        if (metadata == null) return;
 
         for (Class classToRegister : metadata.getAnnotatedClasses()) {
-            log.info("Exposing "+classToRegister.getSimpleName()+" as QMFType");
+            log.info("Exposing " + classToRegister.getSimpleName() + " as QMFType");
             qmfAgent.registerClass(classToRegister);
         }
     }
@@ -60,18 +67,18 @@ public class QmfServiceDeployerEJB extends AbstractComponentDeployer {
         );
         Ejb3Deployment ejb3Deployment = unit.getAttachment(Ejb3Deployment.class);
 
-
         if (beans == null) return;
 
-        for (JBossEnterpriseBeanMetaData m : beans.getEnterpriseBeans()) {
-//            log.info("Detected EJB " + m.getEjbClass());
+        QmfAgentReferencesMetaData agentMetadata = unit.getAttachment(QmfAgentReferencesMetaData.class);
+        if(agentMetadata==null) agentMetadata = unit.getParent().getAttachment(QmfAgentReferencesMetaData.class);   // metadata usually sits on ear, but here we are on jar level
 
+        for (JBossEnterpriseBeanMetaData beanMetaData : beans.getEnterpriseBeans()) {
             // extract ejb container
             EJBContainer ejbContainer = null;
-            if (ejb3Deployment != null && !m.isEntity()) {
+            if (ejb3Deployment != null && !beanMetaData.isEntity()) {
                 ObjectName objName = null;
                 try {
-                    objName = new ObjectName(m.determineContainerName());
+                    objName = new ObjectName(beanMetaData.determineContainerName());
                 }
                 catch (Exception e) {
                     throw new DeploymentException(e);
@@ -79,41 +86,77 @@ public class QmfServiceDeployerEJB extends AbstractComponentDeployer {
                 ejbContainer = (EJBContainer) ejb3Deployment.getContainer(objName);
             }
 
-            if(ejbContainer!=null) {
-                QMFObject annotation = null;
-                Class exposedClass = null;
+            if (ejbContainer == null) continue;
 
-                // get annotation from bean
-                annotation = ejbContainer.getAnnotation(QMFObject.class);
-                if(annotation!=null) exposedClass=ejbContainer.getBeanClass();
+            deployAsQmfObject(beanMetaData, ejbContainer);
+            injectQmfAgent(beanMetaData, ejbContainer, agentMetadata);
+        }
+    }
 
-                // try to get it from interfaces
-                if(annotation==null) {
-                    for(Class localIf : ejbContainer.getBusinessInterfaces()) {
-                        annotation = (QMFObject) localIf.getAnnotation(QMFObject.class);
-                        exposedClass = localIf;
-                        if(annotation!=null) break;
-                    }
+    private void injectQmfAgent(JBossEnterpriseBeanMetaData beanMetaData, EJBContainer ejbContainer, QmfAgentReferencesMetaData agentMetadata) {
+        // no injections
+        if(agentMetadata==null || agentMetadata.getRefFields().isEmpty()) return;
+
+        // look for injected field
+        Class beanClass = ejbContainer.getBeanClass();
+        final Field refField = findInjectedField(beanClass, agentMetadata);
+        if(refField==null) return;
+
+        // ok perform injection
+        log.info("Injecting QMF Agent into "+refField.getDeclaringClass().getSimpleName()+":"+refField.getName());
+        ejbContainer.getInjectors().add(new AbstractPropertyInjector(new FieldBeanProperty(refField)) {
+            public void inject(Object instance) {
+                try {
+                    refField.set(instance, qmfAgent);
+                } catch (IllegalAccessException e) {
+                    log.info("Unable to inject QMF Agent",e);
                 }
-
-                // ok lets see if we got QMFObject
-                if(annotation!=null) {
-                    // expose it
-                    String qmfName = annotation.className();
-                    String qmfClass = exposedClass.getName();
-                    String jndiName = m.getLocalJndiName();
-                    log.info("Exposing "+m.getEjbName()+" as QMF Object: "+qmfName+", "+qmfClass+", "+jndiName);
-
-                    ManagedEJB managedEJB = new ManagedEJB();
-                    managedEJB.setName(qmfName);
-                    managedEJB.setClassName(qmfClass);
-                    managedEJB.setJndiLocation(jndiName);
-
-                    // register on qmf agent
-                    qmfAgent.register(managedEJB);
-                }
-
             }
+        });
+    }
+
+    private Field findInjectedField(Class clazz, QmfAgentReferencesMetaData agentMetadata) {
+        // if field defined on this class return it
+        Field field = agentMetadata.getRefFields().get(clazz);
+        if(field!=null) return field;
+
+        // try to check if it's defined on super class
+        return clazz.equals(Object.class) ? null : findInjectedField(clazz.getSuperclass(), agentMetadata);
+    }
+
+    private void deployAsQmfObject(JBossEnterpriseBeanMetaData m, EJBContainer ejbContainer) {
+        // try to find QMFObject
+        QMFObject annotation = null;
+        Class exposedClass = null;
+
+        // get annotation from bean
+        annotation = ejbContainer.getAnnotation(QMFObject.class);
+        if (annotation != null) exposedClass = ejbContainer.getBeanClass();
+
+        // try to get it from interfaces
+        if (annotation == null) {
+            for (Class localIf : ejbContainer.getBusinessInterfaces()) {
+                annotation = (QMFObject) localIf.getAnnotation(QMFObject.class);
+                exposedClass = localIf;
+                if (annotation != null) break;
+            }
+        }
+
+        // ok lets see if we got QMFObject
+        if (annotation != null) {
+            // expose it
+            String qmfName = annotation.className();
+            String qmfClass = exposedClass.getName();
+            String jndiName = m.getLocalJndiName();
+            log.info("Exposing " + m.getEjbName() + " as QMF Object: " + qmfName + ", " + qmfClass + ", " + jndiName);
+
+            ManagedEJB managedEJB = new ManagedEJB();
+            managedEJB.setName(qmfName);
+            managedEJB.setClassName(qmfClass);
+            managedEJB.setJndiLocation(jndiName);
+
+            // register on qmf agent
+            qmfAgent.register(managedEJB);
         }
     }
 
