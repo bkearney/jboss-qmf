@@ -154,6 +154,7 @@ public class QmfServiceDeployerEJB extends AbstractComponentDeployer {
             managedEJB.setName(qmfName);
             managedEJB.setClassName(qmfClass);
             managedEJB.setJndiLocation(jndiName);
+            managedEJB.setClassLoader(ejbContainer.getClassloader()) ;
 
             // register on qmf agent
             qmfAgent.register(managedEJB);
