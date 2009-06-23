@@ -4,25 +4,19 @@
 
     <!-- QPID connection -->
 
-    <bean name="QpidConnection" class="org.apache.qpid.client.AMQConnection">
-        <constructor>
-            <parameter>amqp://guest:guest@/?brokerlist='tcp://localhost'</parameter>
-        </constructor>
-    </bean>
+    <!--<bean name="QpidConnection" class="org.apache.qpid.client.AMQConnection">-->
+        <!--<constructor>-->
+            <!--<parameter>amqp://guest:guest@/?brokerlist='tcp://localhost'</parameter>-->
+        <!--</constructor>-->
+    <!--</bean>-->
 
-    <bean name="QmfAgent" class="org.apache.qpid.agent.Agent">
-        <property name="label">agent</property>
-        <property name="sessionTransacted">false</property>
-        <property name="connection">
-            <inject bean="QpidConnection"/>
-        </property>
-        <!--<property name="registeredClasses">-->
-        <!--<list elementClass="java.lang.String">-->
-        <!--<value>com.redhat.vdc.backend.QueryDataChangedEvent</value>-->
-        <!--<value>com.redhat.vdc.queries.registration.RegisterQueryUpdatedData</value>-->
-        <!--</list>-->
+    <!--<bean name="QmfAgent" class="org.apache.qpid.agent.Agent">-->
+        <!--<property name="label">agent</property>-->
+        <!--<property name="sessionTransacted">false</property>-->
+        <!--<property name="connection">-->
+            <!--<inject bean="QpidConnection"/>-->
         <!--</property>-->
-    </bean>
+    <!--</bean>-->
 
     <!--
     A web service deployer that hooks in after the EJB deployers
@@ -31,9 +25,9 @@
         <depends>EJB2xDeployer</depends>
         <depends>Ejb3Deployer</depends>
 
-        <property name="qmfAgent">
-            <inject bean="QmfAgent"/>
-        </property>
+        <!--<property name="qmfAgent">-->
+            <!--<inject bean="QmfAgent"/>-->
+        <!--</property>-->
     </bean>
 
 
@@ -41,6 +35,9 @@
         <depends>EJB2xDeployer</depends>
         <depends>Ejb3Deployer</depends>
 
+    </bean>
+
+    <bean name="QmfAgentDefinitionsParserDeployer" class="org.jboss.qmf.core.deployers.QmfAgentDefinitionsParserDeployer">
     </bean>
 
 </deployment>
