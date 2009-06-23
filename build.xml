@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="QMF Jboss Deployer" default="build">
+	<property file="build.properties"/>
+	<property name="version" value="0.01"/>
+	<property name="jar" value="jboss-qmf-${version}"/>
+	<property name="jar.file" value="target/${jar}.jar"/>		
+	<property name="deployer.jar" value="jboss-qmf-${version}-deployer"/>
+	<property name="deployer.jar.file" value="target/${deployer.jar}.jar"/>
+	<property name="deployer.dir" value="target/${deployer.jar}"/>		
+	
+	<path id="compile.classpath">
+		<fileset dir="${qpid.home}/java/build/lib">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${jboss.home}/lib">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${jboss.home}/common/lib">
+			<include name="*.jar"/>
+		</fileset>		
+	</path>
+	
+	<target name="init">
+		<mkdir dir="target/classes"/>
+	</target>
+	
+	<target name="clean">
+		<delete dir="target"/>
+	</target>	
+	
+	<target name="build" depends="init">
+		<javac srcdir="src/main/java"
+		       includes="**/*.java"
+		       classpathref="compile.classpath"
+		       destdir="target/classes"/>
+		<jar destfile="${jar.file}"
+		     basedir="target/classes"/>
+		<mkdir dir="${deployer.dir}/META-INF"/>
+		<mkdir dir="${deployer.dir}/lib/core"/>
+		<mkdir dir="${deployer.dir}/lib/dependencies"/>
+				
+		<copy file="src/main/assembly/resources/jboss-structure.xml" todir="${deployer.dir}/META-INF"/>
+		<copy file="src/main/assembly/resources/qmf-deployer-jboss-beans.xml" todir="${deployer.dir}/META-INF"/>
+		<copy file="${jar.file}" todir="${deployer.dir}/lib/core"/>		
+		
+		<copy todir="${deployer.dir}/lib/dependencies">
+			<fileset dir="${qpid.home}/java/build/lib">
+				<include name="qpid-management-agent-${qpid.version}.jar"/>
+				<include name="qpid-client-${qpid.version}.jar"/>
+				<include name="qpid-common-${qpid.version}.jar"/>
+				<include name="mina-*.jar"/>
+				<include name="commons-*.jar"/>
+				<include name="backport-util*.jar"/>	
+			</fileset>	
+		</copy>	
+		<jar destfile="${deployer.jar.file}" basedir="${deployer.dir}"/>
+	</target>
+	
+	<target name="install" depends="build">
+		<copy file="${deployer.jar.file}" todir="${jboss.home}/server/${jboss.server}/deployers"/>
+	</target>
+		
+</project>
